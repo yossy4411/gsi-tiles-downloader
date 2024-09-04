@@ -65,6 +65,9 @@ func main() {
 
 	for {
 		err = client.DownloadTile()
+		// プログレスバーを表示します。
+		percentage := float32(client.Downloaded) / float32(client.GetTileCount()) * 100.0
+		fmt.Printf("\rダウンロード中... %.2f%% %d/%d", percentage, client.Downloaded, client.GetTileCount())
 		if err != nil {
 			fmt.Println("タイルのダウンロードに失敗しました。")
 			fmt.Println(err)
@@ -73,8 +76,12 @@ func main() {
 		if client.IsFinished() {
 			break
 		}
-		// プログレスバーを表示します。
-		fmt.Printf("\rダウンロード中... %d/%d", client.Downloaded, client.GetTileCount())
-	}
 
+	}
+	fmt.Println("ダウンロードが完了しました。")
+	fmt.Println("./tiles ディレクトリにダウンロードしたタイルが保存されています。")
+	fmt.Println("⚠注意: ダウンロードしたタイルの利用について")
+	fmt.Println("地理院地図のタイルは、利用規約( https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html )に従って利用してください。")
+	fmt.Println("これらの著作権は国土地理院に帰属します。")
+	fmt.Println("場合によっては、地理院地図のタイルを利用する際に国土地理院に許可を得る必要があることがあります。")
 }
