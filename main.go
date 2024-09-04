@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/yossy4411/gsi-tiles-downloader/pkg/downloader"
+)
 
 func main() {
 	fmt.Println("地理院地図タイルダウンローダー")
@@ -18,4 +21,6 @@ func main() {
 		return
 	}
 	fmt.Println("指定されたタイルのIDは「" + tileID + "」です。")
+	client := downloader.NewDownloader(tileID, 10)
+	fmt.Println("mokuroku.csvファイルを取得し、タイルのURLを取得します。")
 }
